@@ -1,15 +1,27 @@
 class BitmapEditor
+  require_relative 'image'
+  require_relative 'commander'
+
+  include Commander
 
   def run(file)
-    return puts "please provide correct file" if file.nil? || !File.exists?(file)
+    output_line("please provide correct file") if file.nil? || !File.exists?(file)
+
+    current_image = nil
 
     File.open(file).each do |line|
       line = line.chomp
-      case line
+      command_args = line.split(' ')
+      command = command_args.first
+
+      case command
       when 'S'
-          puts "There is no image"
+        Commander.show_image(current_image)
+      when 'I'
+        current_image = Commander.create_image(line, command_args)
+        break unless current_image
       else
-          puts 'unrecognised command :('
+        puts 'unrecognised command :('
       end
     end
   end
