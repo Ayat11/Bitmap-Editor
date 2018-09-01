@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Image do
   context 'Valid parameters' do
-    let(:image) { Image.new(5, 5) }
+    let(:image) { Image.new(3, 3) }
 
     it 'should have 2D bitmap array' do
       expect(image.bitmap.is_a?(Array)).to be_truthy
@@ -11,18 +11,28 @@ describe Image do
 
     it "should respond to color_pixels" do
       expect(image).to respond_to(:color_pixels)
+      image.color_pixels(1, 2, 'S')
+      expect(image.bitmap).to eq([['O', 'O', 'O'], ['O', 'O', 'S'], ['O', 'O', 'O']])
     end
 
     it "should respond to draw_vertical_segment" do
       expect(image).to respond_to(:draw_vertical_segment)
+      image.draw_vertical_segment(0, 2, 2, 'V')
+      expect(image.bitmap).to eq([['O', 'O', 'V'], ['O', 'O', 'V'], ['O', 'O', 'V']])
     end
 
     it "should respond to draw_horizontal_segment" do
       expect(image).to respond_to(:draw_horizontal_segment)
+      image.draw_horizontal_segment(0, 2, 0, 'H')
+      expect(image.bitmap).to eq([['H', 'H', 'H'], ['O', 'O', 'O'], ['O', 'O', 'O']])
     end
 
     it "should respond to clear" do
       expect(image).to respond_to(:clear)
+      image.draw_horizontal_segment(0, 2, 0, 'H')
+      expect(image.bitmap).to eq([['H', 'H', 'H'], ['O', 'O', 'O'], ['O', 'O', 'O']])
+      image.clear
+      expect(image.bitmap).to eq([['O', 'O', 'O'], ['O', 'O', 'O'], ['O', 'O', 'O']])
     end
 
     it "should respond to bitmap_string" do
