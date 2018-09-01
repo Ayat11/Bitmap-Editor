@@ -11,6 +11,7 @@ class BitmapEditor
 
     File.open(file).each do |line|
       line = line.chomp
+      next if line == ""
       command_args = line.split(' ')
       command = command_args.first
 
