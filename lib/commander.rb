@@ -31,7 +31,7 @@ module Commander
       row   = command_args[2].to_i
       color = command_args[3]
 
-      return puts "'#{command_line}': Invalid command missing args" if command_args.length < 4
+      return puts "'#{command_line}': Invalid command missing args" if command_args.length != 4
 
       if image.is_a?(Image)
         if in_range?(row, col) && within_bitmap?(image.bitmap, row, col)
@@ -51,7 +51,7 @@ module Commander
       row_2 = command_args[3].to_i
       color = command_args[4]
 
-      return puts "'#{command_line}': Invalid command missing args" if command_args.length < 5
+      return puts "'#{command_line}': Invalid command missing args" if command_args.length != 5
 
       if image.is_a?(Image)
         if in_range?(row_1, row_2, col) && within_bitmap?(image.bitmap, row_1, col) && within_bitmap?(image.bitmap, row_2, col)
@@ -71,7 +71,7 @@ module Commander
       row   = command_args[3].to_i
       color = command_args[4]
 
-      return puts "'#{command_line}': Invalid command missing args" if command_args.length < 5
+      return puts "'#{command_line}': Invalid command missing args" if command_args.length != 5
 
       if image.is_a?(Image)
         if in_range?(col_1, col_2, row) && within_bitmap?(image.bitmap, row, col_1) && within_bitmap?(image.bitmap, row, col_2)
