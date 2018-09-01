@@ -11,6 +11,12 @@ class Image
     @bitmap[row][col] = color
   end
 
+  def draw_vertical_segment(row_1, row_2, col, color)
+    (row_1..row_2).each do |row|
+      @bitmap[row][col] = color
+    end
+  end
+
   def bitmap_string
     @bitmap.map{ |row| puts row.join }
   end

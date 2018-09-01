@@ -24,6 +24,9 @@ class BitmapEditor
       when 'L'
         current_image = Commander.color_image_pixels(current_image, line, command_args)
         break unless current_image
+      when 'V'
+        current_image = Commander.vertical_segment(current_image, line, command_args)
+        break unless current_image
       else
         puts 'unrecognised command :('
       end

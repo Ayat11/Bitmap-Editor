@@ -26,7 +26,7 @@ module Commander
       return puts "'#{command_line}': Invalid command missing args" if command_args.length < 4
 
       if image.is_a?(Image)
-        if in_range?(row, col) && within_bitmap(image.bitmap, row, col)
+        if in_range?(row, col) && within_bitmap?(image.bitmap, row, col)
           image.color_pixels(row-1, col-1, color)
           return image
         else
@@ -37,7 +37,24 @@ module Commander
       end
     end
   
-    def vertical_segment(image, row_1, row_2, col, color)
+    def vertical_segment(image, command_line, command_args)
+      col   = command_args[1].to_i
+      row_1 = command_args[2].to_i
+      row_2 = command_args[3].to_i
+      color = command_args[4]
+
+      return puts "'#{command_line}': Invalid command missing args" if command_args.length < 5
+
+      if image.is_a?(Image)
+        if in_range?(row_1, row_2, col) && within_bitmap?(image.bitmap, row_1, col) && within_bitmap?(image.bitmap, row_2, col)
+          image.draw_vertical_segment(row_1-1, row_2-1, col-1, color)
+          return image
+        else
+          return puts "'#{command_line}': Invalid command invalid args"
+        end
+      else
+        return puts "There is no image"
+      end
     end
   
     def horizontal_segment(image, row, col_1, col_2, color)
@@ -53,8 +70,8 @@ module Commander
 
     private
 
-    def in_range?(row, col)
-      [row, col].all? { |e| e.between?(1, 250) }
+    def in_range?(*args)
+      args.all? { |e| e.between?(1, 250) }
     end
 
     def within_bitmap?(bitmap, row, col)
