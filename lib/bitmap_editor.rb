@@ -20,6 +20,9 @@ class BitmapEditor
       when 'I'
         current_image = Commander.create_image(line, command_args)
         break unless current_image
+      when 'L'
+        current_image = Commander.color_image_pixels(current_image, line, command_args)
+        break unless current_image
       else
         puts 'unrecognised command :('
       end

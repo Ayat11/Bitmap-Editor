@@ -1,10 +1,10 @@
 module Commander
   class << self
     def create_image(command_line, command_args)
-      rows = command_args[1]
-      cols = command_args[2]
+      rows = command_args[1].to_i
+      cols = command_args[2].to_i
       
-      return puts "'#{command_line}': Invalid command" unless rows && cols
+      return puts "'#{command_line}': Invalid command invalid args" unless rows && cols && in_range?(rows, cols)
 
       new_image = Image.new(rows, cols)
 
@@ -18,7 +18,23 @@ module Commander
     def clear_image
     end
   
-    def color_pixels(image, row, col, color)
+    def color_image_pixels(image, command_line, command_args)
+      col   = command_args[1].to_i
+      row   = command_args[2].to_i
+      color = command_args[3]
+
+      return puts "'#{command_line}': Invalid command missing args" if command_args.length < 4
+
+      if image.is_a?(Image)
+        if in_range?(row, col) && within_bitmap(image.bitmap, row, col)
+          image.color_pixels(row-1, col-1, color)
+          return image
+        else
+          return puts "'#{command_line}': Invalid command invalid args"
+        end
+      else
+        return puts "There is no image"
+      end
     end
   
     def vertical_segment(image, row_1, row_2, col, color)
@@ -33,6 +49,16 @@ module Commander
       else
         return puts "There is no image"
       end
+    end
+
+    private
+
+    def in_range?(row, col)
+      [row, col].all? { |e| e.between?(1, 250) }
+    end
+
+    def within_bitmap?(bitmap, row, col)
+      bitmap[row-1] && bitmap[row-1][col-1]
     end
   end
 end

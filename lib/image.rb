@@ -1,26 +1,17 @@
 class Image
   WHITE = 'O'
 
-  attr_reader :bitmap 
+  attr_reader :bitmap
 
-  def initialize(r, c)
-    row = r.to_i
-    col = c.to_i
+  def initialize(row, col)
+    @bitmap = Array.new(row) { Array.new(col, WHITE) }
+  end
 
-    if in_range?(row, col)
-      @bitmap = Array.new(row) { Array.new(col, WHITE) }
-    else
-      @bitmap = nil
-    end
+  def color_pixels(row, col, color)
+    @bitmap[row][col] = color
   end
 
   def bitmap_string
     @bitmap.map{ |row| puts row.join }
-  end
-
-  protected
-
-  def in_range?(row, col)
-    [row, col].all? { |e| e.between?(1, 250) }
   end
 end
