@@ -18,9 +18,5 @@ describe Image do
     it 'should be invalid with no args' do
       expect { Image.new }.to raise_error ArgumentError
     end
-
-    it 'should have no bitmap with out of range args' do
-      expect(Image.new(4, 0).bitmap).to be_nil 
-    end
   end
 end
