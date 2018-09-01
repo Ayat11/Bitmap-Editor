@@ -9,6 +9,22 @@ describe Image do
       expect(image.bitmap.first.is_a?(Array)).to be_truthy
     end
 
+    it "should respond to color_pixels" do
+      expect(image).to respond_to(:color_pixels)
+    end
+
+    it "should respond to draw_vertical_segment" do
+      expect(image).to respond_to(:draw_vertical_segment)
+    end
+
+    it "should respond to draw_horizontal_segment" do
+      expect(image).to respond_to(:draw_horizontal_segment)
+    end
+
+    it "should respond to clear" do
+      expect(image).to respond_to(:clear)
+    end
+
     it "should respond to bitmap_string" do
       expect(image).to respond_to(:bitmap_string)
     end
