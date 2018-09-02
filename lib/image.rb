@@ -1,7 +1,7 @@
 class Image
   WHITE = 'O'
 
-  attr_reader :bitmap
+  attr_reader :bitmap, :rows, :cols
 
   def initialize(rows, cols)
     @rows = rows
@@ -10,20 +10,20 @@ class Image
   end
 
   def color_pixels(row, col, color)
-    @bitmap[row][col] = color.colorize(random_colorize)
+    @bitmap[row][col] = color
   end
 
   def draw_vertical_segment(row_1, row_2, col, color)
-    random_color = random_colorize
-    (row_1..row_2).each do |row|
-      @bitmap[row][col] = color.colorize(random_color)
+    rows = [row_1, row_2]
+    ((rows.min..rows.max)).each do |row|
+      @bitmap[row][col] = color
     end
   end
 
   def draw_horizontal_segment(col_1, col_2, row, color)
-    random_color = random_colorize
-    (col_1..col_2).each do |col|
-      @bitmap[row][col] = color.colorize(random_color)
+    cols = [col_1, col_2]
+    (cols.min..cols.max).each do |col|
+      @bitmap[row][col] = color
     end
   end
 
@@ -33,11 +33,5 @@ class Image
 
   def clear
     @bitmap = Array.new(@rows) { Array.new(@cols, WHITE) }
-  end
-
-  private
-
-  def random_colorize
-    [:red, :green, :yellow, :blue, :magenta, :cyan][rand(0..5)]
   end
 end
