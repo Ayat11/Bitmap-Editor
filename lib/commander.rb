@@ -103,7 +103,7 @@ module Commander
     end
 
     def argument_error(command_line, expected_args)
-      raise ArgumentError.new("'#{command_line}' failed: Invalid command, wromg number of arguments (expected #{expected_args}).")
+      raise ArgumentError.new("'#{command_line}' failed: Invalid command, wrong number of arguments (expected #{expected_args}).")
     end
 
     def no_image_error(command_line)
