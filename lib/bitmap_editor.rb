@@ -5,7 +5,7 @@ class BitmapEditor
   include Commander
 
   def run(file)
-    output_line("please provide correct file") if file.nil? || !File.exists?(file)
+    return puts "please provide correct file" if file.nil? || !File.exists?(file)
 
     current_image = nil
 
