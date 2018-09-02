@@ -17,7 +17,9 @@ class BitmapEditor
 
       case command
       when 'S'
-        Commander.show_image(current_image)
+        bitmap = Commander.show_image(current_image, line, command_args)
+        puts "\n"
+        break unless bitmap
       when 'I'
         current_image = Commander.create_image(line, command_args)
         break unless current_image
