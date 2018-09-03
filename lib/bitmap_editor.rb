@@ -5,7 +5,7 @@ class BitmapEditor
   include Commander
 
   def run(file)
-    return puts "please provide correct file" if file.nil? || !File.exists?(file)
+    return puts "please provide correct file.".colorize(:red) if file.nil? || !File.exists?(file)
 
     current_image = nil
 
@@ -18,7 +18,7 @@ class BitmapEditor
       case command
       when 'S'
         bitmap = Commander.show_image(current_image, line, command_args)
-        puts "\n"
+        puts "\n" if bitmap
         break unless bitmap
       when 'I'
         current_image = Commander.create_image(line, command_args)

@@ -4,8 +4,8 @@ module Commander
   class << self
     def create_image(command_line, command_args)
       execute_command(command_line) do
-        rows = command_args[1].to_i
-        cols = command_args[2].to_i
+        rows = command_args[2].to_i
+        cols = command_args[1].to_i
 
         argument_error(command_line, 2) if command_args.length != 3
         
