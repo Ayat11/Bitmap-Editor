@@ -5,7 +5,12 @@ class BitmapEditor
   include Commander
 
   def run(file)
-    return Commander.show_error(Strings["errors"]["no_file"]) if file.nil? || !File.exists?(file)
+    if file.nil?
+      help_text = File.open('bin/help.txt','rb').read
+      return puts help_text.colorize(:magenta)
+    end 
+
+    return Commander.show_error(Strings["errors"]["no_file"]) if !File.exists?(file)
 
     current_image = nil
 

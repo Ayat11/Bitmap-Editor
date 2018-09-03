@@ -21,9 +21,17 @@ bundle install
 ```
 
 ## Usage
+
+### Loading a command file
 ```sh
 bin/bitmap_editor examples/show.txt
 ```
+
+### Showing help menu
+```sh
+bin/bitmap_editor
+```
+
 
 
 ## Testing
@@ -101,6 +109,8 @@ Main class for Bitmap Editor, it loads a file of commands and applies each comma
 - If X1/X2 or Y1/Y2 in Vertical/Horizontal commands are swapped, Bitmap Editor will handle it correctly (handle it for the user)
 
 - Bitmap Editor will throw an error if invalid number of command arguments are used.  
+
+- Running Bitmap Editor without a file name will show the help menu.
 
 - Bitmap Editor will throw an error if given arguments are out of bounds [1,250] or non-integer input.  
 
