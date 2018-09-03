@@ -19,7 +19,7 @@ describe Commander do
       let(:wrong_command_2) { 'I 4 -5' }
 
       it 'should not execute with wrong number of arguments' do
-        expect { Commander.create_image(wrong_command_1, wrong_command_1.split(' ')) }.to output("'I 4 5 H' failed: Invalid command, wrong number of arguments (expected 2).".colorize(:red) + "\n").to_stdout
+        expect { Commander.create_image(wrong_command_1, wrong_command_1.split(' ')) }.to output("'I 4 5 H' failed: Invalid command, wrong number of arguments, expected: 2".colorize(:red) + "\n").to_stdout
       end
 
       it 'should not create image with false arguments' do
@@ -46,7 +46,7 @@ describe Commander do
       let(:wrong_command_1) { 'C 1' }
 
       it 'should not execute with wrong number of arguments' do
-        expect { Commander.clear_image(nil, wrong_command_1, wrong_command_1.split(' ')) }.to output("'C 1' failed: Invalid command, wrong number of arguments (expected 0).".colorize(:red) + "\n").to_stdout
+        expect { Commander.clear_image(nil, wrong_command_1, wrong_command_1.split(' ')) }.to output("'C 1' failed: Invalid command, wrong number of arguments, expected: 0".colorize(:red) + "\n").to_stdout
       end
 
       it 'should not execute if there is no existing image' do
@@ -70,7 +70,7 @@ describe Commander do
       let(:wrong_command_1) { 'S 1' }
 
       it 'should not execute with wrong number of arguments' do
-        expect { Commander.show_image(nil, wrong_command_1, wrong_command_1.split(' ')) }.to output("'S 1' failed: Invalid command, wrong number of arguments (expected 0).".colorize(:red) + "\n").to_stdout
+        expect { Commander.show_image(nil, wrong_command_1, wrong_command_1.split(' ')) }.to output("'S 1' failed: Invalid command, wrong number of arguments, expected: 0".colorize(:red) + "\n").to_stdout
       end
 
       it 'should not execute if there is no existing image' do
@@ -96,7 +96,7 @@ describe Commander do
       let(:wrong_command_1) { 'L 2' }
 
       it 'should not execute with wrong number of arguments' do
-        expect { Commander.color_image_pixels(nil, wrong_command_1, wrong_command_1.split(' ')) }.to output("'L 2' failed: Invalid command, wrong number of arguments (expected 3).".colorize(:red) + "\n").to_stdout
+        expect { Commander.color_image_pixels(nil, wrong_command_1, wrong_command_1.split(' ')) }.to output("'L 2' failed: Invalid command, wrong number of arguments, expected: 3".colorize(:red) + "\n").to_stdout
       end
 
       it 'should not execute if there is no existing image' do
@@ -122,7 +122,7 @@ describe Commander do
       let(:wrong_command_2) { 'V 3 4 5 F' }
 
       it 'should not execute with wrong number of arguments' do
-        expect { Commander.vertical_segment(nil, wrong_command_1, wrong_command_1.split(' ')) }.to output("'V 3 4' failed: Invalid command, wrong number of arguments (expected 4).".colorize(:red) + "\n").to_stdout
+        expect { Commander.vertical_segment(nil, wrong_command_1, wrong_command_1.split(' ')) }.to output("'V 3 4' failed: Invalid command, wrong number of arguments, expected: 4".colorize(:red) + "\n").to_stdout
       end
 
       it 'should not execute if there is no existing image' do
@@ -152,7 +152,7 @@ describe Commander do
       let(:wrong_command_2) { 'H 3 4 5 B' }
 
       it 'should not execute with wrong number of arguments' do
-        expect { Commander.horizontal_segment(nil, wrong_command_1, wrong_command_1.split(' ')) }.to output("'H 3 4 5 Y Y' failed: Invalid command, wrong number of arguments (expected 4).".colorize(:red) + "\n").to_stdout
+        expect { Commander.horizontal_segment(nil, wrong_command_1, wrong_command_1.split(' ')) }.to output("'H 3 4 5 Y Y' failed: Invalid command, wrong number of arguments, expected: 4".colorize(:red) + "\n").to_stdout
       end
 
       it 'should not execute if there is no existing image' do

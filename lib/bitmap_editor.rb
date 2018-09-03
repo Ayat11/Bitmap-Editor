@@ -5,7 +5,7 @@ class BitmapEditor
   include Commander
 
   def run(file)
-    return puts "please provide correct file.".colorize(:red) if file.nil? || !File.exists?(file)
+    return Commander.show_error(Strings["errors"]["no_file"]) if file.nil? || !File.exists?(file)
 
     current_image = nil
 
@@ -36,7 +36,8 @@ class BitmapEditor
         current_image = Commander.clear_image(current_image, line, command_args)
         break unless current_image
       else
-        puts 'unrecognised command :('
+        Commander.show_error("'#{line}': " + Strings["errors"]["unrecognised_command"])
+        break
       end
     end
   end

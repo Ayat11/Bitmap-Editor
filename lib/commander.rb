@@ -1,5 +1,12 @@
 module Commander
   require 'colorize'
+  require 'yaml'
+
+  lang = 'en'
+  Strings = YAML.load_file("locales/#{lang}.yml")
+  
+  MIN_RANGE = 1
+  MAX_RANGE = 250
 
   class << self
     def create_image(command_line, command_args)
@@ -36,11 +43,11 @@ module Commander
           image.color_pixels(row-1, col-1, color)
           return image
         else
-          raise ArgumentError.new("'#{command_line}' failed: Invalid arguments, out of bounds for the existing image.")
+          raise ArgumentError.new("'#{command_line}' '#{Strings["errors"]["out_of_bounds"]}'")
         end
       end
     end
-  
+
     def vertical_segment(image, command_line, command_args)
       execute_command(command_line) do
         col   = command_args[1].to_i
@@ -84,10 +91,14 @@ module Commander
       end
     end
 
+    def show_error(error_message)
+      puts "#{error_message}".colorize(:red)
+    end
+
     private
 
     def in_range?(*args)
-      args.all? { |e| e.between?(1, 250) }
+      args.all? { |e| e.between?(MIN_RANGE, MAX_RANGE) }
     end
 
     def within_bitmap?(bitmap, row, col)
@@ -97,17 +108,17 @@ module Commander
     def execute_command(command_line, &block)
       yield
     rescue ArgumentError => e
-      puts e.message.colorize(:red)
+      show_error(e.message)
     rescue NoMethodError
       no_image_error(command_line)
     end
 
     def argument_error(command_line, expected_args)
-      raise ArgumentError.new("'#{command_line}' failed: Invalid command, wrong number of arguments (expected #{expected_args}).")
+      raise ArgumentError.new("'#{command_line}' #{Strings["errors"]["wrong_num_args"]} #{expected_args}")
     end
 
     def no_image_error(command_line)
-      puts "'#{command_line}' failed: There is no image yet, please make sure you insert an image first.".colorize(:red)
+      show_error("'#{command_line}' #{Strings["errors"]["no_image_exists"]}")
     end
   end
 end

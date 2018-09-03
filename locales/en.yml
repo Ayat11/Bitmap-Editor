@@ -1,0 +1,7 @@
+errors:
+  unrecognised_command:  unrecognised command :(
+  no_file: please provide correct file.
+  no_image_exists: 'failed: There is no image yet, please make sure you insert an image first.'
+  wrong_num_args: 'failed: Invalid command, wrong number of arguments, expected:'
+  out_of_bounds: 'failed: Invalid arguments, out of bounds for the existing image.'
+  
