@@ -9,8 +9,8 @@ describe Commander do
         image = Commander.create_image(create_command, create_command.split(' '))
         expect(image).to be_a Image
         expect(image.bitmap).to be_a Array
-        expect(image.rows).to eq(4)
-        expect(image.cols).to eq(5)
+        expect(image.rows).to eq(5)
+        expect(image.cols).to eq(4)
       end
     end
 
