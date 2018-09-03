@@ -10,6 +10,11 @@ feature 'Bitmap editor' do
       output = File.read("#{output_directory}/valid_1.txt")
       expect { system("#{test_command} #{input_directory}/valid_1.txt") }.to output("#{output}\n").to_stdout_from_any_process
     end
+    
+    scenario 'with the lower case colors' do
+      output = File.read("#{output_directory}/lowercase_colors.txt")
+      expect { system("#{test_command} #{input_directory}/lowercase_colors.txt") }.to output("#{output}\n").to_stdout_from_any_process
+    end
 
     scenario 'with another test case' do
       output = File.read("#{output_directory}/valid_2.txt")
@@ -27,7 +32,11 @@ feature 'Bitmap editor' do
     end
 
     scenario 'with missing args command' do
-      expect { system("#{test_command} #{input_directory}/invalid_args_missing.txt") }.to output("'I 4' failed: Invalid command, wrong number of arguments (expected 2).".colorize(:red) + "\n").to_stdout_from_any_process
+      expect { system("#{test_command} #{input_directory}/invalid_args_missing.txt") }.to output("'I 4' failed: Invalid command, wrong number of arguments, expected: 2".colorize(:red) + "\n").to_stdout_from_any_process
+    end
+
+    scenario 'with invalid command' do
+      expect { system("#{test_command} #{input_directory}/invalid_command.txt") }.to output("'B 1 1': unrecognised command :(".colorize(:red) + "\n").to_stdout_from_any_process
     end
   end
 end
