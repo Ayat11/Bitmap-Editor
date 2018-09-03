@@ -48,7 +48,7 @@ Represents image object which has bitmap property to operate on and visualize th
 
 
 | Property | Type | Description |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | bitmap | <code>Array</code> | 2D array of pixels |
 | rows | <code>Integer</code> | represents rows count |
 | cols | <code>Array</code> | represnts column count |
@@ -57,7 +57,7 @@ Represents image object which has bitmap property to operate on and visualize th
 
 
 | Method | Arguments | Description |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | initialize | <code>(rows, cols)</code> | Initializes image object with bitmap with given dimensions |
 | color_pixels | <code>(row, col, color)</code> | colors selected pixel with given color |
 | draw_vertical_segment | <code>(row_1, row_2, col, color)</code> | Draws vertical segment between row_1 and row_2 in the selected column using given color |
