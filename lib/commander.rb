@@ -61,7 +61,7 @@ module Commander
           image.draw_vertical_segment(row_1-1, row_2-1, col-1, color)
           return image
         else
-          raise ArgumentError.new("'#{command_line}' failed: Invalid arguments, out of bounds for the existing image.")
+          raise ArgumentError.new("'#{command_line}' #{Strings["errors"]["out_of_bounds"]}")
         end
       end
     end
@@ -79,11 +79,11 @@ module Commander
           image.draw_horizontal_segment(col_1-1, col_2-1, row-1, color)
           return image
         else
-          raise ArgumentError.new("'#{command_line}' failed: Invalid arguments, out of bounds for the existing image.")
+          raise ArgumentError.new("'#{command_line}' #{Strings["errors"]["out_of_bounds"]}")
         end
       end
     end
-  
+
     def show_image(image, command_line, command_args)
       execute_command(command_line) do
         argument_error(command_line, 0) if command_args.length != 1
