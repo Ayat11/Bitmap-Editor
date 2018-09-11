@@ -164,4 +164,42 @@ describe Commander do
       end
     end
   end
+
+  describe 'fill_image' do
+    let(:fill_image_command) { 'F 1 1 B' }
+    let(:vertical_segment_command) { 'V 2 1 2 X' }
+    let(:image) { Image.new(2,3) }
+
+    context 'Valid arguments with existing image' do
+      it 'should fill the image' do
+        expect(image.bitmap).to eq([['O','O','O'], ['O','O','O']])
+        Commander.fill_image(image, fill_image_command, fill_image_command.split(' '))
+        expect(image.bitmap).to eq([['B','B','B'], ['B','B','B']])
+      end
+
+      it 'should fill the region within image' do
+        Commander.vertical_segment(image, vertical_segment_command, vertical_segment_command.split(' '))
+        expect(image.bitmap).to eq([['O','X','O'], ['O','X','O']])
+        Commander.fill_image(image, fill_image_command, fill_image_command.split(' '))
+        expect(image.bitmap).to eq([['B','X','O'], ['B','X','O']])
+      end
+    end
+
+    context 'invalid arguments' do
+      let(:wrong_command_1) { 'F 1 2 C V' }
+      let(:wrong_command_2) { 'F 2 5 C' }
+
+      it 'should not execute with wrong number of arguments' do
+        expect { Commander.fill_image(nil, wrong_command_1, wrong_command_1.split(' ')) }.to output("'F 1 2 C V' failed: Invalid command, wrong number of arguments, expected: 3".colorize(:red) + "\n").to_stdout
+      end
+
+      it 'should not execute if there is no existing image' do
+        expect { Commander.fill_image(nil, fill_image_command, fill_image_command.split(' ')) }.to output("'F 1 1 B' failed: There is no image yet, please make sure you insert an image first.".colorize(:red) + "\n").to_stdout
+      end
+
+      it 'should not execute if arguments out of bound' do
+        expect { Commander.fill_image(image, wrong_command_2, wrong_command_2.split(' ')) }.to output("'F 2 5 C' failed: Invalid arguments, out of bounds for the existing image.".colorize(:red) + "\n").to_stdout
+      end
+    end
+  end
 end

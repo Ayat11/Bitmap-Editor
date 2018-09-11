@@ -35,6 +35,16 @@ describe Image do
       expect(image.bitmap).to eq([['O', 'O', 'O'], ['O', 'O', 'O'], ['O', 'O', 'O']])
     end
 
+    it "should respond to fill" do
+      expect(image).to respond_to(:fill)
+      image.fill(2, 2, 'H')
+      expect(image.bitmap).to eq([['H', 'H', 'H'], ['H', 'H', 'H'], ['H', 'H', 'H']])
+      image.draw_vertical_segment(0, 2, 2, 'V')
+      expect(image.bitmap).to eq([['H', 'H', 'V'], ['H', 'H', 'V'], ['H', 'H', 'V']])
+      image.fill(2, 2, 'B')
+      expect(image.bitmap).to eq([['H', 'H', 'B'], ['H', 'H', 'B'], ['H', 'H', 'B']])
+    end
+
     it "should respond to bitmap_string" do
       expect(image).to respond_to(:bitmap_string)
     end

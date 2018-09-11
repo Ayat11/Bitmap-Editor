@@ -96,7 +96,7 @@ module Commander
           image.fill(row-1, col-1, color)
           return image
         else
-          raise ArgumentError.new("'#{command_line}' '#{Strings["errors"]["out_of_bounds"]}'")
+          raise ArgumentError.new("'#{command_line}' #{Strings["errors"]["out_of_bounds"]}")
         end
       end
     end
