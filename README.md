@@ -70,6 +70,7 @@ Represents image object which has bitmap property to operate on and visualize th
 | color_pixels | <code>(row, col, color)</code> | colors selected pixel with given color |
 | draw_vertical_segment | <code>(row_1, row_2, col, color)</code> | Draws vertical segment between row_1 and row_2 in the selected column using given color |
 | draw_horizontal_segment | <code>(col_1, col_2, row, color)</code> | Draws horizontal segment between col_1 and col_2 in the selected row using given color |
+| fill | <code>(row, col, color)</code> | Fills a region R with the given color, where Pixel (row,col) belongs to R. Any other pixel which is the same colour as (row,col) and shares a common side with any pixel in R also belongs to this region. |
 | bitmap_string | <code>()</code> | Returns image bitmap in string format for viewing |
 | clear | <code>()</code> | Clears the image bitmap pixels to the default value |
 
@@ -86,6 +87,7 @@ Supporting Module for the Bitmap Editor for executing supported commands. It act
  color_image_pixels
  vertical_segment
  horizontal_segment
+ fill_image
  show_image
 ```
 
@@ -102,6 +104,7 @@ Main class for Bitmap Editor, it loads a file of commands and applies each comma
 - `L X Y C` - Colours the pixel (X,Y) with colour C.
 - `V X Y1 Y2 C` - Draw a vertical segment of colour C in column X between rows Y1 and Y2 (inclusive).
 - `H X1 X2 Y C` - Draw a horizontal segment of colour C in row Y between columns X1 and X2 (inclusive).
+- `F X Y C` - Fills region R with the colour C. R is defined as: Pixel (X,Y) belongs to R. Any other pixel which is the same colour as (X,Y) and shares a common side with any pixel in R also belongs to this region.
 - `S` - Show the contents of the current image
 
 
@@ -116,8 +119,12 @@ Main class for Bitmap Editor, it loads a file of commands and applies each comma
 
 - **Lowercase letters** representing the colors are handled by uppercasing them always.
 
+- Improvements to be made: refine feature tests to run all in input folder against output folder.
+
 ## Issues faced
 - Colorize was planned to be used to color the resulting bitmap on the console, however due to the nature of how colorize works, it was breaking the Specs, since it was adding extra characters to the console output.
+
+- [Fill function] Negative array index in Ruby will wrap around, I had to check for positive index to avoid this.
 
 ## Copyright
 Ayat Elsayed, 2018
