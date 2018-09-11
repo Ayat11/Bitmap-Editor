@@ -27,11 +27,37 @@ class Image
     end
   end
 
+  def fill(row, col, color)
+    current_color = @bitmap[row][col]
+    color_and_check_adjacent(row, col, current_color, color)
+  end
+
   def bitmap_string
     @bitmap.map{ |row| puts row.join }
   end
 
   def clear
     @bitmap = Array.new(@rows) { Array.new(@cols, WHITE) }
+  end
+
+  private
+
+  def coordinates_valid(coordinates)
+    [coordinates[:row], coordinates[:col]].all? { |i| i >= 0 }
+  end
+
+  def color_and_check_adjacent(row, col, current_color, new_color)
+    color_pixels(row, col, new_color)
+
+    coordinates = { right: {row: row, col: col+1}, 
+                    left: {row: row, col: col-1}, 
+                    upper: {row: row-1, col: col},
+                    lower: {row: row+1, col: col}
+                  }
+
+    coordinates.each do |dir, coor|
+      cell = @bitmap[coor[:row]][coor[:col]] if coordinates_valid(coor) && @bitmap[coor[:row]]
+      color_and_check_adjacent(coor[:row], coor[:col], current_color, new_color) if cell == current_color
+    end
   end
 end
