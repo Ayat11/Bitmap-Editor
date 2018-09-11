@@ -20,6 +20,11 @@ feature 'Bitmap editor' do
       output = File.read("#{output_directory}/valid_2.txt")
       expect { system("#{test_command} #{input_directory}/valid_2.txt") }.to output("#{output}\n").to_stdout_from_any_process
     end
+
+    scenario 'with fill test case' do
+      output = File.read("#{output_directory}/valid_fill.txt")
+      expect { system("#{test_command} #{input_directory}/valid_fill.txt") }.to output("#{output}\n").to_stdout_from_any_process
+    end
   end
 
   context 'With invalid input files' do
@@ -37,6 +42,10 @@ feature 'Bitmap editor' do
 
     scenario 'with invalid command' do
       expect { system("#{test_command} #{input_directory}/invalid_command.txt") }.to output("'B 1 1': unrecognised command :(".colorize(:red) + "\n").to_stdout_from_any_process
+    end
+
+    scenario 'with invalid fill test case' do
+      expect { system("#{test_command} #{input_directory}/invalid_fill.txt") }.to output("'F 2 R' failed: Invalid command, wrong number of arguments, expected: 3".colorize(:red) + "\n").to_stdout_from_any_process
     end
   end
 end
