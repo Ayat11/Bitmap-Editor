@@ -37,6 +37,9 @@ class BitmapEditor
       when 'H'
         current_image = Commander.horizontal_segment(current_image, line, command_args)
         break unless current_image
+      when 'F'
+        current_image = Commander.fill_image(current_image, line, command_args)
+        break unless current_image
       when 'C'
         current_image = Commander.clear_image(current_image, line, command_args)
         break unless current_image

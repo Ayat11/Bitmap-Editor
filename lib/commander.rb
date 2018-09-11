@@ -84,6 +84,23 @@ module Commander
       end
     end
 
+    def fill_image(image, command_line, command_args)
+      execute_command(command_line) do
+        col = command_args[1].to_i
+        row = command_args[2].to_i
+        color = command_args[3]
+
+        argument_error(command_line, 3) if command_args.length != 4
+
+        if in_range?(row, col) && within_bitmap?(image.bitmap, row, col)
+          image.fill(row-1, col-1, color)
+          return image
+        else
+          raise ArgumentError.new("'#{command_line}' '#{Strings["errors"]["out_of_bounds"]}'")
+        end
+      end
+    end
+
     def show_image(image, command_line, command_args)
       execute_command(command_line) do
         argument_error(command_line, 0) if command_args.length != 1
