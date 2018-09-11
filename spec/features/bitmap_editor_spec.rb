@@ -25,6 +25,11 @@ feature 'Bitmap editor' do
       output = File.read("#{output_directory}/valid_fill.txt")
       expect { system("#{test_command} #{input_directory}/valid_fill.txt") }.to output("#{output}\n").to_stdout_from_any_process
     end
+
+    scenario 'with fill hole test case' do
+      output = File.read("#{output_directory}/hole_fill.txt")
+      expect { system("#{test_command} #{input_directory}/hole_fill.txt") }.to output("#{output}\n").to_stdout_from_any_process
+    end
   end
 
   context 'With invalid input files' do
